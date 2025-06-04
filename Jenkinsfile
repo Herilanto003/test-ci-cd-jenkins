@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/toncompte/ci-cd-node-app.git'
+            }
+        }
+        
         stage('Build') {
             steps {
                 echo 'Installing dependencies...'
