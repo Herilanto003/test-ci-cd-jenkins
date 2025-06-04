@@ -4,34 +4,35 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/toncompte/ci-cd-node-app.git'
+                git 'https://github.com/Herilanto003/test-ci-cd-jenkins.git'
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Installing dependencies...'
-                sh 'npm install'
+                sh 'cd test-ci-cd-jenkins && npm install'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'npm test'
+                sh 'cd test-ci-cd-jenkins && npm test'
             }
         }
 
         stage('Docker Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'docker build -t ci-cd-node-app:latest .'
+                sh 'cd test-ci-cd-jenkins && docker build -t ci-cd-node-app:latest .'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Simulating deployment...'
+                sh 'cd test-ci-cd-jenkins && docker run ci-cd-node-app'
                 sh 'echo Deploy done'
             }
         }
