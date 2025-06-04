@@ -2,37 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Herilanto003/test-ci-cd-jenkins.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 echo 'Installing dependencies...'
-                sh 'cd test-ci-cd-jenkins && npm install'
+                sh 'npm install'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'cd test-ci-cd-jenkins && npm test'
+                sh 'npm test'
             }
         }
 
         stage('Docker Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'cd test-ci-cd-jenkins && docker build -t ci-cd-node-app:latest .'
+                sh 'docker build -t ci-cd-node-app:latest .'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Simulating deployment...'
-                sh 'cd test-ci-cd-jenkins && docker run ci-cd-node-app'
+                sh 'docker run ci-cd-node-app'
                 sh 'echo Deploy done'
             }
         }
