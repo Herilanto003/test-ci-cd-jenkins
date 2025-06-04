@@ -23,14 +23,14 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'cd test-ci-cd-jenkins && docker build -t ci-cd-node-app:latest .'
+                sh 'docker build -t ci-cd-node-app:latest .'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Simulating deployment...'
-                sh 'cd test-ci-cd-jenkins && docker run ci-cd-node-app'
+                sh 'docker run ci-cd-node-app'
                 sh 'echo Deploy done'
             }
         }
